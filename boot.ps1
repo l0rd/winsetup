@@ -8,7 +8,7 @@ $mainFunction =
 
     $isAdmin = ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 
-    $dscUri = "https://raw.githubusercontent.com/l0rd/setup/main/"
+    $dscUri = "https://raw.githubusercontent.com/l0rd/winsetup/main/"
     $dscGenSoftware = "l0rd.generalSoftware.dsc.yml";
     $dscWinSettings = "l0rd.winSettings.dsc.yml";
     $dscDev = "l0rd.dev.dsc.yml";
@@ -60,8 +60,8 @@ function GetLatestWinGet
 
     if(!(($isWinGetRecent[0] -gt 1) -or ($isWinGetRecent[0] -ge 1 -and $isWinGetRecent[1] -ge 6))) # WinGet is greater than v1 or v1.6 or higher
     {
-       $paths = "Microsoft.VCLibs.x64.14.00.Desktop.appx", "Microsoft.UI.Xaml.2.8.x64.appx", "Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
-       $uris = "https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx", "https://github.com/microsoft/microsoft-ui-xaml/releases/download/v2.8.6/Microsoft.UI.Xaml.2.8.x64.appx", "https://aka.ms/getwinget"
+       $paths = "Microsoft.VCLibs.arm64.14.00.Desktop.appx", "Microsoft.UI.Xaml.2.8.arm64.appx", "Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
+       $uris = "https://aka.ms/Microsoft.VCLibs.arm64.14.00.Desktop.appx", "https://github.com/microsoft/microsoft-ui-xaml/releases/download/v2.8.6/Microsoft.UI.Xaml.2.8.arm64.appx", "https://aka.ms/getwinget"
        Write-Host "Downloading WinGet and its dependencies..."
 
        for ($i = 0; $i -lt $uris.Length; $i++) {

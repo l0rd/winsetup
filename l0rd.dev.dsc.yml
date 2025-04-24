@@ -37,6 +37,7 @@ properties:
       settings:
         id: Microsoft.VisualStudioCode
         source: winget
+        architecture: arm64
 
     - resource: Microsoft.WinGet.DSC/WinGetPackage
       id: Microsoft.PowerShell
@@ -46,3 +47,4 @@ properties:
       settings:
         id: Microsoft.PowerShell
         source: winget
+        architecture: arm64

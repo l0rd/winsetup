@@ -10,6 +10,7 @@ properties:
       settings:
         id: Microsoft.PowerToys
         source: winget
+        architecture: arm64
 
     # needs non-admin
 
@@ -21,6 +22,7 @@ properties:
       settings:
         id: AgileBits.1Password
         source: winget
+        architecture: arm64
 
     - resource: Microsoft.WinGet.DSC/WinGetPackage
       id: Logitech.OptionsPlus
@@ -30,3 +32,4 @@ properties:
       settings:
         id: Logitech.OptionsPlus
         source: winget
+        architecture: arm64
