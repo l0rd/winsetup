@@ -1,22 +1,22 @@
-$mainFunction = 
+$mainFunction =
 {
     $mypath = $MyInvocation.MyCommand.Path
     Write-Output "Path of the script: $mypath"
     Write-Output "Args for script: $Args"
 
-    GetLatestWinGet 
+    GetLatestWinGet
 
     $isAdmin = ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 
-    $dscUri = "https://raw.githubusercontent.com/crutkas/setup/main/"
-    $dscGenSoftware = "crutkas.generalSoftware.dsc.yml";
-    $dscWinSettings = "crutkas.winSettings.dsc.yml";
-    $dscDev = "crutkas.dev.dsc.yml";
-    $dscOffice = "crutkas.office.dsc.yml";
+    $dscUri = "https://raw.githubusercontent.com/l0rd/setup/main/"
+    $dscGenSoftware = "l0rd.generalSoftware.dsc.yml";
+    $dscWinSettings = "l0rd.winSettings.dsc.yml";
+    $dscDev = "l0rd.dev.dsc.yml";
+    $dscPodman = "podman.dev.dsc.yml";
     $dscPowerToysEnterprise = "Z:\source\powertoys\.configurations\configuration.vsEnterprise.dsc.yaml";
 
-    $dscOfficeUri = $dscUri + $dscOffice;
-    $dscGenSoftwareUri = $dscUri + $dscGenSoftware 
+    $dscPodmanUri = $dscUri + $dscPodman;
+    $dscGenSoftwareUri = $dscUri + $dscGenSoftware
     $dscDevUri = $dscUri + $dscDev
     $dscWinSettingsUri = $dscUri + $dscWinSettings
 
@@ -26,24 +26,24 @@ $mainFunction =
         # Shoulder tap terminal to it gets registered moving foward
         Start-Process shell:AppsFolder\Microsoft.WindowsTerminal_8wekyb3d8bbwe!App
 
-        winget configuration -f $dscGenSoftwareUri 
-   
+        winget configuration -f $dscGenSoftwareUri
+
         # restarting for Admin now
         Start-Process PowerShell -wait -Verb RunAs "-NoProfile -ExecutionPolicy Bypass -Command `"cd '$pwd'; & '$mypath' $Args;`"";
         exit;
     }
-    else 
+    else
     {
-        Write-Host "Start: Office & Teams install"
-        winget configuration -f $dscOfficeUri 
-        Write-Host "Done: Office & Teams install"
-   
+        Write-Host "Start: Podman dev requirements install"
+        winget configuration -f $dscPodmanUri
+        Write-Host "Done: Podman dev requirements install"
+
         # Staring dev workload
         Write-Host "Start: Dev flows install"
-        winget configuration -f $dscDevUri 
+        winget configuration -f $dscDevUri
 
         Write-Host "Start: PowerToys dsc install"
-        winget configuration -f $dscPowerToysEnterprise # no cleanup needed as this is intentionally local
+        winget configuration -f $win # no cleanup needed as this is intentionally local
 
         Write-Host "Done: Dev flows install"
         # ending dev workload
@@ -72,7 +72,7 @@ function GetLatestWinGet
        }
 
        Write-Host "Installing WinGet and its dependencies..."
-   
+
        foreach($filePath in $paths)
        {
            Write-Host "Installing: ($filePath)"
@@ -85,11 +85,11 @@ function GetLatestWinGet
        Write-Host "Cleaning up"
        foreach($filePath in $paths)
        {
-          if (Test-Path $filePath) 
+          if (Test-Path $filePath)
           {
              Write-Host "Deleting: ($filePath)"
              Remove-Item $filePath -verbose
-          } 
+          }
           else
           {
              Write-Error "Path doesn't exits: ($filePath)"

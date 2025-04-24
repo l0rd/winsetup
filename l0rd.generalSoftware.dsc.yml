@@ -11,6 +11,8 @@ properties:
         id: Microsoft.PowerToys
         source: winget
 
+    # needs non-admin
+
     - resource: Microsoft.WinGet.DSC/WinGetPackage
       id: AgileBits.1Password
       directives:
@@ -27,14 +29,4 @@ properties:
         allowPrerelease: true
       settings:
         id: Logitech.OptionsPlus
-        source: winget
-
-# needs non-admin
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: Spotify.Spotify
-      directives:
-        description: Install Spotify.Spotify
-        allowPrerelease: true
-      settings:
-        id: Spotify.Spotify
         source: winget

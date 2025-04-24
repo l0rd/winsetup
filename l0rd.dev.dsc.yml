@@ -3,33 +3,22 @@
 properties:
   configurationVersion: 0.2.0
   resources:
- 
-# Creates a new Dev Drive volume with Drive letter 'Z' and label 'Dev Drive 1' onto disk 0
+    # Creates a new Dev Drive volume with Drive letter 'Z' and label 'Dev Drive 1' onto disk 0
     - resource: Disk
       id: DevDrive1
       directives:
         module: StorageDsc
-        description: 'Format a new Dev Drive volume onto Disk 0'
+        description: "Format a new Dev Drive volume onto Disk 0"
         allowPrerelease: true
       settings:
-        DiskId: '0'
-        DiskIdType: 'Number'
-        DriveLetter: 'Z'
-        FSLabel: 'Dev Drive'
+        DiskId: "0"
+        DiskIdType: "Number"
+        DriveLetter: "Z"
+        FSLabel: "Dev Drive"
         DevDrive: true
         AllowDestructive: true
-        FSFormat: 'ReFS'
-        Size: '75Gb'
-
-# Getting Git stuff
-    - resource: Microsoft.WinGet.DSC/WinGetPackage
-      id: git.git
-      directives:
-        description: Install git.git
-        allowPrerelease: true
-      settings:
-        id: git.git
-        source: winget
+        FSFormat: "ReFS"
+        Size: "75Gb"
 
     # will use the DSC here to get Visual Studio and other items.
     - resource: GitDsc/GitClone
@@ -38,7 +27,7 @@ properties:
         allowPrerelease: true
       settings:
         HttpsUrl: https://github.com/microsoft/powertoys.git
-        RootDirectory: 'Z:/Source/' # will clone into /PowerToys root
+        RootDirectory: "Z:/Source/" # will clone into /PowerToys root
 
     - resource: Microsoft.WinGet.DSC/WinGetPackage
       id: Microsoft.VisualStudioCode
